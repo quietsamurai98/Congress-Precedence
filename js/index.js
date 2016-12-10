@@ -107,9 +107,17 @@ function addSpeech(id){
     var index = findRep(chamber,id);
     chamber[index].numSpeeches++;
     speeches.push(new Speech(speeches.length,id,chamber[index].name,side));
-    updateTable();
+    sortAndUpdate();
   }
 }
+
+function deleteSpeech(){
+  var speech = speeches.pop();
+  var index = findRep(chamber,speech.speakerID);
+  chamber[index].numSpeeches--;
+  updateTable();
+}
+
 function addQuestion(id){
   chamber[findRep(chamber,id)].numQuestions++;
   updateTable();
