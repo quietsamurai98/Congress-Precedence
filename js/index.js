@@ -18,12 +18,14 @@ function Speech(speechID, speakerID, speakerName, side){
 }
 
 var repHeaders = [
-  //"ID",
+  
   "Name",
+  "ID",
   "Total Speeches",
   "Total Questions",
   "Add Speech",
-  "Add Question"
+  "Add Question",
+  "Remove Question"
 ]
 
 var speechHeaders = [
@@ -73,12 +75,13 @@ function makeRowFromRep(representative){
   
     outStr+="<tr>";
 
-    //outStr+="<td style='text-align: left;'>" + representative.id + "</td>";
     outStr+="<td style='text-align: left;'>" + representative.name + "</td>";
+    outStr+="<td style='text-align: left;'>" + representative.id + "</td>";
     outStr+="<td style='text-align: right;'>" + representative.numSpeeches + "</td>";
     outStr+="<td style='text-align: right;'>" + representative.numQuestions + "</td>";
     outStr+="<td><input type=\"button\" onclick=\"addSpeech("+representative.id+")\" value=\"Add Speech\"></td>";
     outStr+="<td><input type=\"button\" onclick=\"addQuestion("+representative.id+")\" value=\"Add Question\"></td>";
+    outStr+="<td><input type=\"button\" onclick=\"removeQuestion("+representative.id+")\" value=\"Remove Question\"></td>";
   
     outStr+="</tr>";
   
@@ -109,6 +112,11 @@ function addSpeech(id){
 }
 function addQuestion(id){
   chamber[findRep(chamber,id)].numQuestions++;
+  updateTable();
+}
+
+function removeQuestion(id){
+  chamber[findRep(chamber,id)].numQuestions--;
   updateTable();
 }
 
@@ -144,6 +152,14 @@ function addRepAndRefresh(name){
     updateTable();
   }
 }
+
+function deleteRep(id){
+  if (id>=0){
+    chamber.splice(findRep(chamber,id),1);
+    updateTable();
+  }
+}
+
 function sortAndUpdate(){
   chamber.sort(function(a,b){
     return (1000*a.numSpeeches + findRecency(speeches,a.id)) - (1000*b.numSpeeches + findRecency(speeches,b.id));
