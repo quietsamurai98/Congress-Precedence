@@ -1,0 +1,10 @@
+table, th, td {
+    border: 1px solid black;
+}
+
+.floatedTableLeft {
+    float:left;
+}
+.floatedTableRight {
+    float:right;
+}
