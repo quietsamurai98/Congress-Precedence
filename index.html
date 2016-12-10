@@ -12,8 +12,14 @@
 </head>
 
 <body>
-  <button onclick="addRepAndRefresh(prompt('Representative name:'))">Add Representative</button>
-<button onclick="sortAndUpdate()">Sort by Precedence</button>
+<button style='float: left;' onclick="sortAndUpdate()">Sort by Precedence</button>
+
+<button style='float: right;' onclick="speeches.pop()">Delete Most Recent Speech</button>
+<br>
+<br>
+<button style='float: left;' onclick="addRepAndRefresh(prompt('Representative name:'))">Add Representative</button>
+<button style='float: left;' onclick="deleteRep(prompt('Representative ID:'))">Remove Representative</button>
+<br>
 <br>
 <div id="allReps"> </div>
 <div id="allSpeeches"></div>
